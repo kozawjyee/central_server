@@ -11,7 +11,7 @@ class DeskeraController extends Controller
     protected $url;
     protected $retry;
     protected $timeout;
-    
+
     public $token;
 
     public function __construct() {
@@ -20,7 +20,7 @@ class DeskeraController extends Controller
         $this->timeout = env('HTTP_TIMEOUT');
     }
 
-    public function refreshToken() {
+    public function generateToken() {
 
         // $responses = Http::pool(fn (Pool $pool) => [
         //     $pool->get('http://localhost/first'),
@@ -35,9 +35,6 @@ class DeskeraController extends Controller
             if($response->status() === 200) {
                 $data = json_decode($response->body(), true);
                 $this->token = $data['token'];
-                return response()->json([
-                    'data' => $data
-                ]);
             }
 
         } catch(Expection $e) {
