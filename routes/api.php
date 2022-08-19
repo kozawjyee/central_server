@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeskeraController;
-
+use App\Http\Controllers\InvoiceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('deskera', [DeskeraController::class, 'index']);
+Route::get('deskera/sale-invoice', [InvoiceController::class, 'getInvoice']);

@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * ==========================
+ * Development By InnoScript
+ * ==========================
+ * Author       InnoScript Team
+ * Email        dev@innoscript.co
+ * Phone        09421038123
+ */
+
+ 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,9 +24,8 @@ class DeskeraController extends Controller
     }
 
     public function index() {
-        $data = $this->deskera->generateToken();
         return response()->json([
-            "data" => $data
-        ], 200);
+            'token' => $this->deskera->token
+        ],200);
     }
 }
