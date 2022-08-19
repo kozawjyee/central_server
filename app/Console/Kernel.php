@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('log:deskeraCron')->everyMinute();
     }
-
+    
     /**
      * Register the commands for the application.
      *
@@ -35,7 +35,6 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }
