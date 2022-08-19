@@ -19,16 +19,23 @@ use Illuminate\Http\Client\Pool;
 class DeskeraModel extends Model {
     use HasFactory;
 
-    protected $url;
-    protected $retry;
-    protected $timeout;
+    protected $token_url;
 
+    public $retry;
+    public $timeout;
     public $token;
+    public $master_url;
+    public $cdomain;
 
     public function __construct() {
-        $this->url = env('DESKERA_TOKEN_URL');
+        $this->token_url = env('DESKERA_TOKEN_URL');
+        $this->master_url = env('DESKERA_MASTER') . '/rest/v1';
+        $this->account_url = env('DESKERA_ACCOUNT');
         $this->retry = env('HTTP_RETRY');
         $this->timeout = env('HTTP_TIMEOUT');
+        $this->cdomain = env('DESKERA_CDOMAIN');
+        
+        $this->generateToken();
     }
 
     public function generateToken() {
@@ -40,7 +47,7 @@ class DeskeraModel extends Model {
         // ]);
 
         try {
-            $response = Http::retry($this->retry, $this->timeout)->get($this->url);
+            $response = Http::retry($this->retry, $this->timeout)->get($this->token_url);
             $status = $response->status();
             
             if($response->status() === 200) {
@@ -50,7 +57,7 @@ class DeskeraModel extends Model {
             }
 
         } catch(Expection $e) {
-            return Log::info($e);
+            \Log::channel('deskera')->info($e);
         }
     }
 }
