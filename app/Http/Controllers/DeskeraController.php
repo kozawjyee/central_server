@@ -12,6 +12,7 @@
  
 namespace App\Http\Controllers;
 
+use App\Models\DeskeraModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Pool;

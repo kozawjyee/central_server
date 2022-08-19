@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InvoiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('posts',[PostController::class, 'index']);
+Route::get('invoice' , [InvoiceController::class, 'getInvoice']);
