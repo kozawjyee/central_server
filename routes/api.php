@@ -18,3 +18,5 @@ use App\Http\Controllers\DeskeraController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('deskera', [DeskeraController::class, 'index']);
