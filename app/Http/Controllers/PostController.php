@@ -11,15 +11,19 @@ class PostController extends Controller
         $token = self::generateToken();
         $cdomain = 'shwetechinternal';
         $response = Http::timeout(10)->get('http://sg36.accounting.deskera.com/rest/v1/master/product?request={cdomain:'.$cdomain.'}&token='.$token);
+        
         if($response->status() === 401){
             $token = self::generateToken();
             $response = Http::timeout(10)->get('http://sg36.accounting.deskera.com/rest/v1/master/product?request={cdomain:'.$cdomain.'}&token='.$token);
         }
+
         $obj = json_decode($response, TRUE);
         $names = array();
+
         for($i=0; $i<count($obj['data']['typedata']); $i++){
             array_push($names,$obj['data']['typedata'][$i]['name']);
         }
+        
         return $names;
     }
 
