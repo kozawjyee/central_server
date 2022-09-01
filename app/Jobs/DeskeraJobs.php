@@ -8,13 +8,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\CustomerController;
 
 class DeskeraJobs implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
 
     /**
      * Create a new job instance.
@@ -30,10 +30,7 @@ class DeskeraJobs implements ShouldQueue
      * @return void
      */
     public function handle()
-    {   
-        for($x =0; $x<10; $x) {
-            \Log::info("Queue Working " . $x);
-        }
-        
+    {
+        Log::channel('deskera')->info("Queue Working ");
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeskeraController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('deskera', [DeskeraController::class, 'index']);
+Route::get('customer', [CustomerController::class, 'index']);
+Route::post('customer', [CustomerController::class, 'save']);
+Route::get('onthego/customer', [CustomerController::class, 'getDataFromOnTheGo']);

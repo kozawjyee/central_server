@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Pool;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class DeskeraModel extends Model {
     use HasFactory;
@@ -34,7 +36,7 @@ class DeskeraModel extends Model {
         $this->retry = env('HTTP_RETRY');
         $this->timeout = env('HTTP_TIMEOUT');
         $this->cdomain = env('DESKERA_CDOMAIN');
-        
+
         $this->generateToken();
     }
 
@@ -49,15 +51,15 @@ class DeskeraModel extends Model {
         try {
             $response = Http::retry($this->retry, $this->timeout)->get($this->token_url);
             $status = $response->status();
-            
+
             if($response->status() === 200) {
                 $data = json_decode($response->body(), true);
                 $this->token = $data['token'];
                 return $this->token;
             }
 
-        } catch(Expection $e) {
-            \Log::channel('deskera')->info($e);
+        } catch(Exception $e) {
+            Log::channel('deskera')->info($e);
         }
     }
 }
