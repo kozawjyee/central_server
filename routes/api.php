@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeskeraController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ItemController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('deskera', [DeskeraController::class, 'index']);
+Route::get('invoice', [InvoiceController::class, 'getInvoice']);
+
+Route::get('item/productList' , [ItemController::class, 'getProductList']);
+Route::post('item/productList' , [ItemController::class, 'postProductList']);
+
+Route::get('item/productPrice' , [ItemController::class, 'getProductPrice']);
+Route::get('item/availableStock' , [ItemController::class, 'getAvailableStock']);
