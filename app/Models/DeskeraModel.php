@@ -26,6 +26,7 @@ class DeskeraModel extends Model {
     public $token;
     public $master_url;
     public $cdomain;
+    public $account_url;
 
     public function __construct() {
         $this->token_url = env('DESKERA_TOKEN_URL');
