@@ -25,7 +25,6 @@ class CustomerController extends Controller
     protected $pageSize;
 
     public function __construct(DeskeraModel $deskera) {
-        dd($deskera);
         $this->deskera = $deskera;
         $this->path = 'master/customer';
         $this->pageSize = 100;
