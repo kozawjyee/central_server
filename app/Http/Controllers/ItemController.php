@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeskeraModel;
+use App\Models\Item;
 use Carbon\Exceptions\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -16,6 +17,8 @@ class ItemController extends Controller
     public function __construct(DeskeraModel $deskera)
     {
         $this->deskera = $deskera;
+        $this->path = 'master/product';
+        $this->pageSize = 100;
     }
 
     public function getProductList()
@@ -23,7 +26,7 @@ class ItemController extends Controller
         $request = json_encode([
             'cdomain' => $this->deskera->cdomain
         ]);
-        $url = "{$this->deskera->account_url}/master/product?request={$request}&token={$this->deskera->token}";
+        $url = "{$this->deskera->account_url}/{$this->path}?request={$request}&token={$this->deskera->token}";
 
         try {
             $response = Http::retry($this->deskera->retry, $this->deskera->timeout)->get($url);
@@ -38,99 +41,57 @@ class ItemController extends Controller
             return Log::info($e);
         }
     }
+
+    public function getDataFromOnTheGo()
+    {
+        $data = Item::all()->toArray();
+        return response()->json([
+            'data' => $data
+        ], 200);
+    }
+
+    /**
+     * Save Customer API [Deskera]
+     *
+     */
 
     public function postProductList()
     {
+        $data = [];
+
         $request = json_encode([
             'cdomain' => $this->deskera->cdomain,
-            'username' => 'admin',
-            'producttypevalue' => 'Inventory Part',
-            'productname' => 'Wallet 4',
-            'sequenceformatvalue' => 'NA',
-            'productID' => 'Wallet04',
-            'currencyvalue' => 'SGD',
-            'asOfDate' => 'May 21, 2019 12:00:00 AM',
-            'purchaseAccountValue' => 'Purchases',
-            'purchaseReturnAccountValue' => 'Purchases',
-            'purchaseuom' => 'Pcs',
-            'salesAccountValue' => 'Sales',
-            'salesReturnAccountValue' => 'Sales',
-            'salesuom' => 'Pcs',
-            'stockuom' => 'Pcs',
-            'uom' => 'Pcs',
-            'warehouseValue' => 'COMMERZONE',
-            'locationValue' => 'Pune',
-            'stockAdjustmentAccountValue' => 'Advertising',
-            'inventoryAccountValue' => 'Advertising',
-            'costOfGoodsSoldAccountValue' => 'Advertising',
-            'isWarehouseForProduct' => 'true',
-            'isLocationForProduct' => 'true'
+            'username' => $data['admin'],
+            'producttypevalue' => $data['Inventory Part'],
+            'productname' => $data['Wallet 4'],
+            'sequenceformatvalue' => $data['NA'],
+            'productID' => $data['Wallet04'],
+            'currencyvalue' => $data['SGD'],
+            'asOfDate' => $data['May 21, 2019 12:00:00 AM'],
+            'purchaseAccountValue' => $data['Purchases'],
+            'purchaseReturnAccountValue' => $data['Purchases'],
+            'purchaseuom' => $data['Pcs'],
+            'salesAccountValue' => $data['Sales'],
+            'salesReturnAccountValue' => $data['Sales'],
+            'salesuom' => $data['Pcs'],
+            'stockuom' => $data['Pcs'],
+            'uom' => $data['Pcs'],
+            'warehouseValue' => $data['COMMERZONE'],
+            'locationValue' => $data['Pune'],
+            'stockAdjustmentAccountValue' => $data['Advertising'],
+            'inventoryAccountValue' => $data['Advertising'],
+            'costOfGoodsSoldAccountValue' => $data['Advertising'],
+            'isWarehouseForProduct' => $data['true'],
+            'isLocationForProduct' => $data['true'],
+            'desc' => $data['desc'],
+            'additionalDescription' => $data['additionalDescription'],
         ]);
 
-        // dd($request);
-        $url = "{$this->deskera->account_url}/master/product?request={$request}&token={$this->deskera->token}";
-        // $response = Http::post($url);
-        // return response()->json([
-        //     'data' => $response,
-        //     "success" => true
-        // ],200);
+        $url = "{$this->deskera->account_url}/{$this->path}?request={$request}&token={$this->deskera->token}";
 
         try {
             $response = Http::retry($this->deskera->retry, $this->deskera->timeout)->post($url);
-            $status = $response->status();
 
-            if ($response->status() === 200) {
-                $data = json_decode($response->body(), true);
-
-                return response()->json($data, 200);
-            }
-        } catch (Exception $e) {
-            return Log::info($e);
-        }
-    }
-
-    public function getProductPrice()
-    {
-        $request = json_encode([
-            'cdomain' => $this->deskera->cdomain,
-            "isdefaultHeaderMap" => false,
-            "customervalue" => "C5",
-            "currencycode" => "SGD",
-            "getSOPOflag" => "true",
-            "products" => "Test1,AAA",
-            "quantity" => "",
-            "transactiondate" => "Mar 13, 2019 12:00:00 AM",
-            "gcurrencyid" => "6",
-            "timezonedifference" => "+8.00",
-        ]);
-        $url = "{$this->deskera->account_url}/transaction/productpriceV2?request={$request}&token={$this->deskera->token}";
-
-        try {
-            $response = Http::retry($this->deskera->retry, $this->deskera->timeout)->get($url);
-            $status = $response->status();
-
-            if ($response->status() === 200) {
-                $data = json_decode($response->body(), true);
-
-                return response()->json($data, 200);
-            }
-        } catch (Exception $e) {
-            return Log::info($e);
-        }
-    }
-
-    public function getAvailableStock()
-    {
-        $request = json_encode(([
-            'cdomain' => $this->deskera->cdomain,
-            "productvalue" => "PRO_001",
-            "warehouse" => "DS,COMMERZONE",
-            "locationname" => "Default Location"
-        ]));
-        $url = "{$this->deskera->account_url}/inventory/product-available-stock?request={$request}&token={$this->deskera->token}";
-
-        try {
-            $response = Http::retry($this->deskera->retry, $this->deskera->timeout)->get($url);
             $status = $response->status();
 
             if ($response->status() === 200) {
