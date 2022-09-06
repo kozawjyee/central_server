@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('txn_headers', function (Blueprint $table) {
             $table->id();
             $table->string('TxnID');
-            $table->string('TxnTypeID');
-            $table->string('TxnDate');
+            $table->integer('TxnTypeID');
+            $table->date('TxnDate');
             $table->string('CustomerID');
             $table->string('SalesPersonID');
             $table->string('CurrencyCode');
-            $table->string('TaxRate');
-            $table->string('TaxInclusive');
+            $table->integer('TaxRate');
+            $table->boolean('TaxInclusive');
             $table->string('CreditTermID');
             $table->string('PaymentMethodID');
             $table->integer('TotalBeforeDiscount');
