@@ -79,7 +79,27 @@ class CustomerController extends Controller
             "isVendor"=> $data["isVendor"],
             "customeraccountvalue"=> $data["customeraccountvalue"],
             "customfield" => $data["customfield"],
-            "addressDetail" => $data["addressDetail"]
+            "addressDetail" => $data["addressDetail"],
+            "fieldlabel" => $data["fieldlabel"],
+            "value" => $data["value"],
+            "aliasNameID" => $data["aliasNameID"],
+            "aliasName" => $data["aliasName"],
+            "addressDetail" => $data["addressDetail"],
+            "country" => $data["country"],
+            "city" => $data["city"],
+            "state" => $data["state"],
+            "stateCode" => $data["stateCode"],
+            "phone" => $data["phone"],
+            "mobileNumber" => $data["mobileNumber"],
+            "fax" => $data["fax"],
+            "emailID" => $data["emailID"],
+            "recipientName" => $data["recipientName"],
+            "contactPerson" => $data["contactPerson"],
+            "contactPersonNumber" => $data["contactPersonNumber"],
+            "contactPersonDesignation" => $data["contactPersonDesignation"],
+            "website" => $data["website"],
+            "isBillingAddress" => $data["isBillingAddress"],
+            "isDefaultAddress" => $data["isDeafultAddress"]
         ]);
 
         $url = "{$this->deskera->account_url}/{$this->path}?request=${request}&token={$this->deskera->token}";
@@ -97,4 +117,5 @@ class CustomerController extends Controller
             return false;
         }
     }
+
 }
