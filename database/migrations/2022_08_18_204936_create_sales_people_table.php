@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('sales_people', function (Blueprint $table) {
             $table->id();
-            $table->string('SalesPersonID'); 
-            $table->string('SalesPersonName'); 
-            $table->string('SalesPersonLocationID'); 
-            $table->string('MainLocationID'); 
-            $table->string('UnloadLocationID'); 
-            $table->timestamps();
+            $table->string('SalesPersonID')->nullable(); 
+            $table->string('SalesPersonName')->nullable(); 
+            $table->string('SalesPersonLocationID')->nullable(); 
+            $table->string('MainLocationID')->nullable(); 
+            $table->string('UnloadLocationID')->nullable(); 
         });
     }
 

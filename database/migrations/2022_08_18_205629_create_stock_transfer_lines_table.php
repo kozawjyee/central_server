@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('stock_transfer_lines', function (Blueprint $table) {
             $table->id();
-            $table->string('TransferID');
-            $table->integer('LineNo');
-            $table->string('ItemID');
-            $table->string('UomID');
-            $table->integer('Quantity');
-            $table->timestamps();
+            $table->string('TransferID')->nullable();
+            $table->integer('LineNo')->nullable();
+            $table->string('ItemID')->nullable();
+            $table->string('UomID')->nullable();
+            $table->integer('Quantity')->nullable();
         });
     }
 

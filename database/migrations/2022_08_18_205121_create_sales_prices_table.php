@@ -15,18 +15,17 @@ return new class extends Migration
     {
         Schema::create('sales_prices', function (Blueprint $table) {
             $table->id();
-            $table->string('SalesPriceID');
-            $table->integer('SalesPriceType');
-            $table->string('SalesPriceTypeID');
-            $table->string('ItemID');
-            $table->string('UomID');
-            $table->integer('MinQuantity');
-            $table->integer('UnitPrice');
-            $table->integer('Discount');
-            $table->string('CurrencyCode');
-            $table->date('StartDate');
-            $table->date('EndDate');
-            $table->timestamps();
+            $table->string('SalesPriceID')->nullable();
+            $table->integer('SalesPriceType')->nullable();
+            $table->string('SalesPriceTypeID')->nullable();
+            $table->string('ItemID')->nullable();
+            $table->string('UomID')->nullable();
+            $table->integer('MinQuantity')->nullable();
+            $table->integer('UnitPrice')->nullable();
+            $table->integer('Discount')->nullable();
+            $table->string('CurrencyCode')->nullable();
+            $table->date('StartDate')->nullable();
+            $table->date('EndDate')->nullable();
         });
     }
 

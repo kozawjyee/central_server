@@ -15,24 +15,23 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('ItemID');
-            $table->string('AlternateItemID');
-            $table->string('Name');
-            $table->string('Name2');
-            $table->string('PackingTypeID');
-            $table->string('PackingTypeName');
-            $table->string('BasedUomID');
-            $table->string('SalesUomID');
-            $table->string('ItemGroupID');
-            $table->string('ItemGroupName');
-            $table->string('ItemTypeID');
-            $table->string('ItemTypeName');
-            $table->boolean('Status');
-            $table->string('Remark'); 
-            $table->string('Remark2');
-            $table->string('Remark3');
-            $table->string('Remark4');   
-            $table->timestamps();
+            $table->string('ItemID')->nullable();
+            $table->string('AlternateItemID')->nullable();
+            $table->string('Name')->nullable();
+            $table->string('Name2')->nullable();
+            $table->string('PackingTypeID')->nullable();
+            $table->string('PackingTypeName')->nullable();
+            $table->string('BasedUomID')->nullable();
+            $table->string('SalesUomID')->nullable();
+            $table->string('ItemGroupID')->nullable();
+            $table->string('ItemGroupName')->nullable();
+            $table->string('ItemTypeID')->nullable();
+            $table->string('ItemTypeName')->nullable();
+            $table->boolean('Status')->nullable();
+            $table->string('Remark')->nullable(); 
+            $table->string('Remark2')->nullable();
+            $table->string('Remark3')->nullable();
+            $table->string('Remark4')->nullable();   
         });
     }
 

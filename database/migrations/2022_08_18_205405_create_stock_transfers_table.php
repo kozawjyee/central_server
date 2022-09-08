@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('stock_transfers', function (Blueprint $table) {
             $table->id();
-            $table->string('TransferID');
-            $table->date('TransferDate');
-            $table->string('SalesPersonID');
-            $table->string('FromLocationID');
-            $table->string('ToLocationID');
-            $table->string('Remark');
-            $table->timestamps();
+            $table->string('TransferID')->nullable();
+            $table->date('TransferDate')->nullable();
+            $table->string('SalesPersonID')->nullable();
+            $table->string('FromLocationID')->nullable();
+            $table->string('ToLocationID')->nullable();
+            $table->string('Remark')->nullable();
         });
     }
 

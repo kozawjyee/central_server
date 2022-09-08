@@ -15,17 +15,16 @@ return new class extends Migration
     {
         Schema::create('item_details', function (Blueprint $table) {
             $table->id();
-            $table->string('ItemID'); 
-            $table->string('UomID'); 
-            $table->string('UomName'); 
-            $table->integer('UomRate'); 
-            $table->integer('DefaultUnitPrice'); 
-            $table->string('BarcodeNo'); 
-            $table->string('Remark'); 
-            $table->string('Remark2'); 
-            $table->string('Remark3'); 
-            $table->string('Remark4'); 
-            $table->timestamps();
+            $table->string('ItemID')->nullable(); 
+            $table->string('UomID')->nullable(); 
+            $table->string('UomName')->nullable(); 
+            $table->integer('UomRate')->nullable(); 
+            $table->integer('DefaultUnitPrice')->nullable(); 
+            $table->string('BarcodeNo')->nullable(); 
+            $table->string('Remark')->nullable(); 
+            $table->string('Remark2')->nullable(); 
+            $table->string('Remark3')->nullable(); 
+            $table->string('Remark4')->nullable(); 
         });
     }
 

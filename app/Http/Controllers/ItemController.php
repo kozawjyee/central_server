@@ -38,8 +38,7 @@ class ItemController extends Controller
                 return response()->json($data, 200);
             }
         } catch (Exception $e) {
-            Log::channel('deskera')->info($e);
-            return false;
+            return Log::info($e);
         }
     }
 
@@ -62,28 +61,28 @@ class ItemController extends Controller
 
         $request = json_encode([
             'cdomain' => $this->deskera->cdomain,
-            'username' => $data['username'],
-            'producttypevalue' => $data['producttypevalue'],
-            'productname' => $data['productname'],
-            'sequenceformatvalue' => $data['sequenceformatvalue'],
-            'productID' => $data['productID'],
-            'currencyvalue' => $data['currencyvalue'],
-            'asOfDate' => $data['asOfDate'],
-            'purchaseAccountValue' => $data['purchaseAccountValue'],
-            'purchaseReturnAccountValue' => $data['purchaseReturnAccountValue'],
-            'purchaseuom' => $data['purchaseuom'],
-            'salesAccountValue' => $data['salesAccountValue'],
-            'salesReturnAccountValue' => $data['salesReturnAccountValue'],
-            'salesuom' => $data['salesuom'],
-            'stockuom' => $data['stockuom'],
-            'uom' => $data['uom'],
-            'warehouseValue' => $data['warehouseValue'],
-            'locationValue' => $data['locationValue'],
-            'stockAdjustmentAccountValue' => $data['stockAdjustmentAccountValue'],
-            'inventoryAccountValue' => $data['inventoryAccountValue'],
-            'costOfGoodsSoldAccountValue' => $data['costOfGoodsSoldAccountValue'],
-            'isWarehouseForProduct' => $data['isWarehouseForProduct'],
-            'isLocationForProduct' => $data['isLocationForProduct'],
+            'username' => $data['admin'],
+            'producttypevalue' => $data['Inventory Part'],
+            'productname' => $data['Wallet 4'],
+            'sequenceformatvalue' => $data['NA'],
+            'productID' => $data['Wallet04'],
+            'currencyvalue' => $data['SGD'],
+            'asOfDate' => $data['May 21, 2019 12:00:00 AM'],
+            'purchaseAccountValue' => $data['Purchases'],
+            'purchaseReturnAccountValue' => $data['Purchases'],
+            'purchaseuom' => $data['Pcs'],
+            'salesAccountValue' => $data['Sales'],
+            'salesReturnAccountValue' => $data['Sales'],
+            'salesuom' => $data['Pcs'],
+            'stockuom' => $data['Pcs'],
+            'uom' => $data['Pcs'],
+            'warehouseValue' => $data['COMMERZONE'],
+            'locationValue' => $data['Pune'],
+            'stockAdjustmentAccountValue' => $data['Advertising'],
+            'inventoryAccountValue' => $data['Advertising'],
+            'costOfGoodsSoldAccountValue' => $data['Advertising'],
+            'isWarehouseForProduct' => $data['true'],
+            'isLocationForProduct' => $data['true'],
             'desc' => $data['desc'],
             'additionalDescription' => $data['additionalDescription'],
         ]);
@@ -101,8 +100,7 @@ class ItemController extends Controller
                 return response()->json($data, 200);
             }
         } catch (Exception $e) {
-            Log::channel('deskera')->info($e);
-            return false;
+            return Log::info($e);
         }
     }
 }
