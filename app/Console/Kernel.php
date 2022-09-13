@@ -39,35 +39,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('log:deskeraCron')->everyMinute();
-        $schedule->call(function(DeskeraModel $deskera) {
+        $schedule->call(function(DeskeraModel $deskera, DSK_item $dsk_item) {
             try{
-                DB::table('central_items')->insert([
-                    'cdomain' => $deskera->cdomain,
-                    'username' => 'admin',
-                    'producttypevalue' => 'Inventory Part',
-                    'productname' => '6 Yogurt P Bot Pack',
-                    'sequenceformatvalue' => '6 Yogurt P Bot Pack',
-                    'productID' => '6 Yogurt',
-                    'currencyvalue' => 'MMK',
-                    'asOfDate' => '2022-8-12 12:00:00',
-                    'purchaseAccountValue' => 'Purchases',
-                    'purchaseuom' => 'X6PBot',
-                    'salesAccountValue' => 'Sales',
-                    'salesReturnAccountValue' => 'Sales',
-                    'salesuom' => 'X6PBot',
-                    'stockuom' => 'X6PBot',
-                    'uom' => 'X6PBot',
-                    'warehouseValue' => 'YGN_WH',
-                    'locationValue' => 'Yangon',
-                    'stockAdjustmentAccountValue' => 'Inventory Adjustment Account',
-                    'inventoryAccountValue' => 'inventory',
-                    'costOfGoodsSoldAccountValue' => 'Cost of Good Sold',
-                    'isWarehouseForProduct' => true,
-                    'isLocationForProduct' => true,
-                    'desc' => 'description',
-                    'additionaldescription' => 'additional description',
-                    'is_success' => true
-                ]);
+                    $dsk_item->storeData();
                 }catch(Exception $e){
                     Log::channel('deskera')->info($e);
                     return false;

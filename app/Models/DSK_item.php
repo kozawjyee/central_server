@@ -26,7 +26,7 @@ class DSK_item extends Model
 
         try{
             DB::table('central_items')->insert([
-                'cdomain' => $deskera->cdomain,
+                'cdomain' => $this->deskera->cdomain,
                 'username' => 'admin',
                 'producttypevalue' => 'Inventory Part',
                 'productname' => '6 Yogurt P Bot Pack',
