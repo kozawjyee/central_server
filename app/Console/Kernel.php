@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\CentralItems;
 use Illuminate\Support\Facades\DB;
 use App\Models\DSK_item;
+use App\Models\DSK_Customer;
 
 use Exception;
 
@@ -39,6 +40,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('log:deskeraCron')->everyMinute();
+        $schedule->call(function(DSK_Customer $dsk_customer){
+            try{
+                $dsk_customer->postCustomer();
+            }catch(Exception $e){
+                Log::channel('deskera')->info($e);
+                return false;
+            }
+        })->everyMinute();
         $schedule->call(function(DeskeraModel $deskera, DSK_item $dsk_item) {
             try{
                     $dsk_item->storeData();
